@@ -34,27 +34,38 @@ class Player extends Character {
   }
 
   takeItem(itemName) {
-
-    // Fill this in
-
+    //add item to inventory from the current room
+    const item = this.currentRoom.getItemByName(itemName);
+    this.items.push(item);
+    //filter item from the room;
+    this.currentRoom.items = this.currentRoom.items.filter(retainedItems => retainedItems.name !== itemName)
   }
 
   dropItem(itemName) {
 
-    // Fill this in
-
+    //add the item from the player inventory to the current room
+    const item = this.getItemByName(itemName);
+    this.currentRoom.items.push(item);
+    //filter item from player inventory
+    this.items = this.items.filter(retainedItems => retainedItems.name !== itemName)
   }
 
   eatItem(itemName) {
 
-    // Fill this in
+    // if item is a food, it is removed from inventory
+    // if item isn't a food, get a message saying it can't be eaten
+
+    let item = this.getItemByName(itemName);
+    if (item instanceof Food) {
+      this.items = this.items.filter(el => el.name !== itemName);
+    } else {
+      console.log(`${itemName} cannot be eaten!`)
+    }
 
   }
 
   getItemByName(name) {
-
-    // Fill this in
-
+    return this.items.filter(item => item.name === name)[0]
   }
 
   hit(name) {

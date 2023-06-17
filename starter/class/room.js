@@ -52,14 +52,16 @@ class Room {
   }
 
   getItemByName(name) {
-
-    // Fill this in
-
+    let roomItem = this.items.filter(item => item.name === name)[0];
+    this.items = this.items.filter(item => item.name !== name);
+    return roomItem;
   }
 
   getEnemyByName(name) {
 
     // Fill this in
+
+  }
 
 }
 
